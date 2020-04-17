@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: arc-token
+type: Opaque
+stringData:
+  value: "GatewayKey arc&202005171758&TeXqG6sle0Q9UdG6/euGh4Aw1j+/l7MKzz/5IGO1F1HOZLEanuQTwUIcCZMoWX7bxIfxedtxRdVlotmf7mWJFw=="
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: arc-environment
+data:
+  config.service.endpoint: "https://www.management.azure-api.net/subscriptions/c6a33fd3-e442-48a4-b82d-bcc4ad8a71d7/resourceGroups/Api-Default-West-US/providers/Microsoft.ApiManagement/service/www?api-version=2018-06-01-preview"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: arc
+  template:
+    metadata:
+      labels:
+        app: arc
+    spec:
+      containers:
+      - name: arc
+        image: mcr.microsoft.com/azure-api-management/gateway:beta
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8081
+        env:
+        - name: config.service.auth
+          valueFrom:
+            secretKeyRef:
+              name: arc-token
+              key: value
+        envFrom:
+        - configMapRef:
+            name: arc-environment
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arc
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  - name: https
+    port: 443
+    targetPort: 8081
+  selector:
+    app: arc
