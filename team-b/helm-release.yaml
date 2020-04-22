@@ -5,10 +5,9 @@ metadata:
   namespace: default
 spec:
   releaseName: apim-helm-release
-  chart:
-    git: https://github.com/Azure/api-management-self-hosted-gateway
-    ref: master
-    path: helm-charts/azure-api-management-gateway
+  chart: 
+    repository: https://azure.github.io/api-management-self-hosted-gateway/helm-charts/
+    name: azure-api-management-gateway
   values:
     gateway.endpoint: "https://www.management.azure-api.net/subscriptions/c6a33fd3-e442-48a4-b82d-bcc4ad8a71d7/resourceGroups/Api-Default-West-US/providers/Microsoft.ApiManagement/service/www?api-version=2018-06-01-preview"
     gateway.authKey: "GatewayKey arc-helm&202005221752&nUYqMbECKaWUaN4/pzERqreDUIv9r1V3qRWtA9YxoohA35+1444KEnfWjfARZCe+maDY4tnj/kzJv65sFRmzsQ=="
