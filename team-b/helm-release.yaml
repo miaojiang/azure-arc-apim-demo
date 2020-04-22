@@ -7,6 +7,7 @@ spec:
   releaseName: apim-helm-release
   chart: 
     repository: https://azure.github.io/api-management-self-hosted-gateway/helm-charts/
+    version: 0.1.0
     name: azure-api-management-gateway
   values:
     gateway.endpoint: "https://www.management.azure-api.net/subscriptions/c6a33fd3-e442-48a4-b82d-bcc4ad8a71d7/resourceGroups/Api-Default-West-US/providers/Microsoft.ApiManagement/service/www?api-version=2018-06-01-preview"
