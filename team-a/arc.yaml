@@ -4,7 +4,7 @@ metadata:
   name: arc-token
 type: Opaque
 stringData:
-  value: "GatewayKey arc&202005171758&TeXqG6sle0Q9UdG6/euGh4Aw1j+/l7MKzz/5IGO1F1HOZLEanuQTwUIcCZMoWX7bxIfxedtxRdVlotmf7mWJFw=="
+  value: "GatewayKey arc&202005221759&zU+9eENiQrtx30nOIdmwGmRoC42D5o1YPpvbRHx5Hg/tb/qLPnGu9IgtMfZ/+Bg3NlluHjNBjhMf79QoGuI2Rw=="
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -16,19 +16,19 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-management-gateway
+  name: arc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-management-gateway
+      app: arc
   template:
     metadata:
       labels:
-        app: api-management-gateway
+        app: arc
     spec:
       containers:
-      - name: api-management-gateway
+      - name: arc
         image: mcr.microsoft.com/azure-api-management/gateway:beta
         ports:
         - name: http
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-management-gateway
+  name: arc
 spec:
   type: NodePort
   ports:
@@ -59,4 +59,4 @@ spec:
     port: 443
     targetPort: 8081
   selector:
-    app: api-management-gateway
+    app: arc
