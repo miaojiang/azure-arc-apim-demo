@@ -16,19 +16,19 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: arc
+  name: api-management
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: arc
+      app: api-management
   template:
     metadata:
       labels:
-        app: arc
+        app: api-management
     spec:
       containers:
-      - name: arc
+      - name: api-management
         image: mcr.microsoft.com/azure-api-management/gateway:beta
         ports:
         - name: http
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: arc
+  name: api-management
 spec:
   type: NodePort
   ports:
@@ -59,4 +59,4 @@ spec:
     port: 443
     targetPort: 8081
   selector:
-    app: arc
+    app: api-management
