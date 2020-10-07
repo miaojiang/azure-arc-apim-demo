@@ -2,9 +2,9 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: apim-helm-release
-  namespace: default
+  namespace: arc-apim-demo
 spec:
-  releaseName: apim-helm-release
+  releaseName: arc-apim-demo
   chart: 
     repository: https://azure.github.io/api-management-self-hosted-gateway/helm-charts/
     version: 0.1.0
